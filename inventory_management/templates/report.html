@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'report.css' %}">
+    <title>Report</title>
+</head>
+
+<body>
+    <div class="chart" style="background: conic-gradient(#f15854 {{unshippedValPer}}%, #4d4d4d {{shippedValPer}}%);">
+    </div>
+
+    <ul class="key">
+        <li>
+            <strong class="percent red">{{shippedVal}}</strong>
+            <span class="choice">Un-Shipped Value</span>
+        </li>
+        <li>
+            <strong class="percent gray">{{unshippedVal}}</strong>
+            <span class="choice">Shipped Value.</span>
+        </li>
+
+    </ul>
+</body>
+
+</html>

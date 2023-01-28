@@ -25,6 +25,8 @@
                                 <div class="btn_group">
                                     <a href="/add_product">Add Product</a>
                                     <a href="/">Un-Shipped Entry</a>
+                                    <a href="/report">Report</a>
+                                    <a href="/logout">Logout</a>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +37,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Product</th>
-                                    <th>Category</th>
+                                    <th>Value (in Mushroom Coins)</th>
                                     <!-- <th></th>
                                 <th>City</th> -->
                                 </tr>
@@ -45,7 +47,7 @@
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
                                     <td>{{ product.name }}</td>
-                                    <td>{{ product.category }}</td>
+                                    <td>{{ product.value }}</td>
                                     <!-- <td>iOS Developer</td>
                                 <td>Sinaai-Waas</td> -->
 

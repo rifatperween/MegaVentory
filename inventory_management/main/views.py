@@ -44,6 +44,7 @@ def signupPage(request):
     context = {'form':form}
     return render(request, 'signup.html', context)
     # return render(request, "signup.html")
+
 @login_required(login_url='login')
 def home(request):
     if request.method=="GET" and request.GET:
@@ -52,18 +53,32 @@ def home(request):
         # warehouseItem.save()
     context = {"products": warehouseItem.objects.filter(hasShipped=False)}
     return render(request, "home.html",context=context)
+
 def logoutPage(request):
     logout(request)
     return redirect('login')
+
 @login_required(login_url='login')
 def addProduct(request):
     if request.method=="POST":
         product = request.POST.get("product")
-        category = request.POST.get("category")
-        warehouseItem.objects.create(name=product, category=category).save()
-        print(product, category, 'created')
+        value = request.POST.get("value")
+        warehouseItem.objects.create(name=product, value=value).save()
+        print(product, value, 'created')
     return render(request, "addProduct.html")
 @login_required(login_url='login')
 def shipped(request):
     context = {"products": warehouseItem.objects.filter(hasShipped=True)}
     return render(request, "shipped.html",context)
+
+@login_required(login_url='login')
+def report(request):
+    context = {"shippedVal":0, "unshippedVal":0}
+    for el in warehouseItem.objects.all():
+        if el.hasShipped:
+            context["shippedVal"]+=el.value
+        else:
+            context["unshippedVal"]+=el.value
+    context["shippedValPer"]=int(context["shippedVal"]*100/(context["shippedVal"]+context["unshippedVal"]))
+    context["unshippedValPer"]=int(context["unshippedVal"]*100/(context["shippedVal"]+context["unshippedVal"]))
+    return render(request, "report.html", context)
